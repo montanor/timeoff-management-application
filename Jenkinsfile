@@ -7,5 +7,11 @@ pipeline {
       }
     }
 
+    stage('Publish Artifact') {
+      steps {
+        sh 'npm publish'
+      }
+    }
+
   }
 }
