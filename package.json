@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "private": false,
   "description": "Simple yet powerful absence management software for small and medium size business",
+  "publishConfig": {
+    "registry": "http://nexus:8081/repository/npm-private/"
+  },
   "engines": {
     "node": ">=10.16.0"
   },
