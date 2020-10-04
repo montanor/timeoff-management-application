@@ -30,5 +30,17 @@ pipeline {
         }
       }
 
+          stage('Deploying into server') {
+      steps {
+        withCredentials(bindings: [string(
+                          credentialsId: 'ansible-asume',
+                          variable: 'ROOT_PASS')
+                          ]) {
+            sh 'ansible-playbook -v --inventory=hosts --extra-vars="ansible_sudo_pass=${env.ROOT_PASS}" deploytimeoff.yml'
+          }
+
+        }
+      }
+
     }
   }
