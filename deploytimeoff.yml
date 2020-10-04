@@ -1,0 +1,52 @@
+- hosts: server
+  remote_user: david
+
+  tasks:
+  - name: Add NodeSource package key
+    become: yes
+    apt_key:
+      state: present
+      url: https://deb.nodesource.com/gpgkey/nodesource.gpg.key
+  - name: Add NodeSource repository
+    become: yes
+    apt_repository:
+      repo: 'deb https://deb.nodesource.com/node_12.x buster main'
+  - name: Install NodeJS
+    become: yes
+    apt:
+      state: present
+      name: nodejs
+  - name: Ensure sqlite is at the latest version
+    become: yes
+    apt:
+      name: sqlite
+      state: latest
+      update_cache: true
+  - name: Install pm2
+    become: yes
+    npm:
+      name: pm2      
+      global: yes
+      production: yes
+      state: present
+  - name: Download artifact from the private repo      
+    shell: |
+      rm -rf ~/timeoff
+      mkdir -p ~/timeoff
+      cd ~/timeoff      
+      wget $(npm view TimeOff.Management --registry http://192.168.39.122:8081/repository/npm-group/ dist.tarball)
+      tar -xzvf *.tgz
+      cd ./package
+      npm install
+  - name: Start App
+    shell: |
+      pm2 stop TimeOff
+      pm2 --name TimeOff start npm -- start
+    ignore_errors: yes
+
+  
+
+
+    
+
+
