@@ -36,7 +36,7 @@ pipeline {
                           credentialsId: 'ansible-asume',
                           variable: 'ROOT_PASS')
                           ]) {
-            sh 'ansible-playbook -v --inventory=hosts --extra-vars="ansible_sudo_pass=${env.ROOT_PASS}" deploytimeoff.yml'
+            sh "ansible-playbook -v --inventory=hosts --extra-vars=ansible_sudo_pass=${env.ROOT_PASS} deploytimeoff.yml"
           }
 
         }
