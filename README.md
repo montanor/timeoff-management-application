@@ -8,6 +8,8 @@ This repo content is a fork of https://github.com/timeoff-management/timeoff-man
 - When a new push is accepted into the MASTER branch of this repo a pipeline is triggered.
 - This pipeline, builds the NodeJS artifact and uploads it into a Nexus repository.
 - Finally, the artifact gets deployed into the application server.
+  
+![Pipeline Screenshot](https://i.ibb.co/zVrkCCQ/Screenshot-20201004-192022.png)
 
 ## Files added to this repo
 - **Jenkinsfile** Groove definition file for the jenkins pipeline
