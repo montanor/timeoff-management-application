@@ -29,6 +29,10 @@
       global: yes
       production: yes
       state: present
+  - name: Stop App
+    shell: |     
+      pm2 stop TimeOff
+    ignore_errors: yes
   - name: Download artifact from the private repo      
     shell: |
       rm -rf ~/timeoff
@@ -40,13 +44,6 @@
       npm install
   - name: Start App
     shell: |
-      pm2 stop TimeOff
+      cd ~/timeoff/package      
       pm2 --name TimeOff start npm -- start
     ignore_errors: yes
-
-  
-
-
-    
-
-
